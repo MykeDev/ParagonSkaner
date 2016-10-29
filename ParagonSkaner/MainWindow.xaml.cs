@@ -42,12 +42,28 @@ namespace ParagonSkaner
             LogContent("process", "Scanning");
             CommonDialog dialog = new WIA.CommonDialog();
             ImageFile scannedImage = null;
-           // Device device = dialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType,false,false);
-            //string comm = CommandID.wiaCommandTakePicture;
-           // string comm = "{AF933CAC-ACAD-11D2-A093-00C04F72DC3C}";
-            //Item scannedImage = device.ExecuteCommand(comm);
-            //scannedImage =scannedImage_raw.t
-            //LogContent("commands", device.Commands);
+            //Device WiaDev = dialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType,true,false);
+
+            //Start Scan
+
+            //WIA.Item Item = WiaDev.Items[1] as WIA.Item;
+
+
+            //try
+            //{
+
+            //    scannedImage = (ImageFile)dialog.ShowTransfer(Item, EnvFormatID.wiaFormatPNG, false);
+
+            //    return scannedImage;
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error: " + ex.Message);
+            //}
+
+
             scannedImage = dialog.ShowAcquireImage(
                                 WiaDeviceType.ScannerDeviceType,
                                 WiaImageIntent.UnspecifiedIntent,
@@ -61,8 +77,8 @@ namespace ParagonSkaner
             LogContent("destination", destination);
             try
             {
-                //scannedImage.SaveFile(destination);
-                //return scannedImage;
+                scannedImage.SaveFile(destination);
+                return scannedImage;
             }
             catch(Exception e)
             {
@@ -102,8 +118,8 @@ namespace ParagonSkaner
             }
             textBlock.Text = str;
             ImageFile par = Scan(str);
-            //ImageSource imSource = new BitmapImage(new Uri(destination));
-            //image_show.Source = imSource;
+            ImageSource imSource = new BitmapImage(new Uri(destination));
+            image_show.Source = imSource;
         }
 
 
