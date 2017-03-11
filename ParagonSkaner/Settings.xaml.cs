@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WIA;
 
 namespace ParagonSkaner
 {
@@ -24,7 +25,9 @@ namespace ParagonSkaner
     {
         public string path;
         public bool needed = true;
+        public WIA.Device default_device;
         string source="set.dat";
+        string defaulte = null;
         //FileStream fs = null;
         string[] lines = null;
         public Settings()
@@ -32,7 +35,13 @@ namespace ParagonSkaner
             InitializeComponent();
             if (!File.Exists(source))
             {
-                File.AppendAllText(source,"paragon\\");
+                
+                defaulte = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "Paragons\\");
+                File.AppendAllText(source, defaulte);
+                if (!Directory.Exists(defaulte))
+                {
+                    Directory.CreateDirectory(defaulte);
+                }
             }
             //fs = new FileStream(source, FileMode.Open, FileAccess.ReadWrite);
             try
@@ -46,19 +55,22 @@ namespace ParagonSkaner
             catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Path_Source.Text = "paragon";
+                Path_Source.Text = defaulte;
             }
-            if (!Directory.Exists("paragon"))
-            {
-                Directory.CreateDirectory("paragon");
-            }
+
+            
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             path=Path_Source.Text;
+            if (!path.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+            {
+                path += System.IO.Path.DirectorySeparatorChar;
+            }
             lines[0] = path;
             File.WriteAllLines(source, lines);
+            
         }
 
         //public void Close()
@@ -72,6 +84,14 @@ namespace ParagonSkaner
                 e.Cancel = true;
                 this.Hide();
             }
+        }
+        private void set_scaner_Click(object sender, RoutedEventArgs e)
+        {
+            CommonDialog dialog = new WIA.CommonDialog();
+            default_device = dialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
+            DeviceInfo dev_ifo = null;
+            //dev_ifo.Properties.
+            //Device.Text = 
         }
     }
 }

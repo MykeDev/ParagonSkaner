@@ -10,6 +10,20 @@
     <StackPanel>
         <Label Content="Ścieżka zapisu:" Margin="10,0"></Label>
         <TextBox x:Name="Path_Source" Margin="10,0" />
+        <Label Content="Domyślny skaner:" Margin="10,0"></Label>
+        <Grid Margin="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+
+            </Grid.ColumnDefinitions>
+            <Border BorderThickness="1" BorderBrush="Black"  Grid.Column="0">
+                <TextBlock x:Name="Device" Grid.Row="0"/>
+            </Border>
+            <Button x:Name="set_scaner" Content="wybierz skaner"  Grid.Column="1"  HorizontalAlignment="Stretch" Click="set_scaner_Click"/>
+        </Grid>
+
+        
         <Button x:Name="Submit" Content="Potwierdź" Margin="10" Click="Submit_Click" />
     </StackPanel>
 </Window>

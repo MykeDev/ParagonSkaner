@@ -5,21 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParagonSkaner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="468.589" Width="645.728"
+        Title="MainWindow" Height="507.689" Width="645.728"
         Closing="Window_Closing">
-    <Grid Margin="0,0,17,18" RenderTransformOrigin="0.5,0.5">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Calendar Name="calCalendar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="170" Width="193" SelectedDatesChanged="calCalendar_changed" Grid.Column="0"/>
+        <Button x:Name="button_scam" Content="Skanuj" HorizontalAlignment="Left" Margin="208,34,0,0" VerticalAlignment="Top" Width="80" Click="button_scam_Click" Grid.Column="0"/>
 
-        <Calendar Name="calCalendar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="170" Width="193" SelectedDatesChanged="calCalendar_changed"/>
-        <Button x:Name="button_scam" Content="Skanuj" HorizontalAlignment="Left" Margin="208,54,0,0" VerticalAlignment="Top" Width="80" Click="button_scam_Click"/>
-
-        <Image x:Name="image_show" HorizontalAlignment="Left" Height="356" Margin="333,54,0,0" VerticalAlignment="Top" Width="264"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="203,79,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Height="21" Width="75"/>
-        <ScrollViewer HorizontalAlignment="Left" Margin="30,202,0,0" Width="258">
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="203,79,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Height="21" Width="75" Grid.Column="0"/>
+        <ScrollViewer HorizontalAlignment="Left" Margin="30,202,0,0" Width="258" Grid.Column="0">
             <TextBlock x:Name="Log"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="Auto" Width="258" />
         </ScrollViewer>
-        <Label x:Name="label" Content="Log" HorizontalAlignment="Left" Margin="20,176,0,0" VerticalAlignment="Top" Width="103"/>
-        <TextBox x:Name="Note" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" Margin="203,157,0,0"/>
-        <Label x:Name="label1" Content="Note" HorizontalAlignment="Left" Margin="203,131,0,0" VerticalAlignment="Top" Width="85"/>
-        <Button x:Name="settings" Content="Ustawienia" HorizontalAlignment="Left" Margin="333,34,0,0" VerticalAlignment="Top" Width="75" Click="settings_Click"/>
+        <Label x:Name="label" Content="Log" HorizontalAlignment="Left" Margin="20,176,0,0" VerticalAlignment="Top" Width="103" Grid.Column="0"/>
+        <TextBox x:Name="Note" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" Margin="203,157,0,0" Grid.Column="0"/>
+        <Label x:Name="label1" Content="Note" HorizontalAlignment="Left" Margin="203,131,0,0" VerticalAlignment="Top" Width="85" Grid.Column="0"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+        <Button x:Name="settings" Content="Ustawienia" HorizontalAlignment="Center" Margin="15" VerticalAlignment="Top" Width="75" Click="settings_Click" Grid.Row="0"/>
+            <Image x:Name="image_show"  Grid.Row="1" HorizontalAlignment="Center" />
+            <TextBlock x:Name="File_show" Grid.Row="2"/>
+            <WrapPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button x:Name="button_previous" Content="Poprzedni"  Margin="5" VerticalAlignment="Top" Width="75" Click="button_previous_Click"/>
+                <Button x:Name="button_del" Content="Usuń"  Margin="5" VerticalAlignment="Top" Width="75" Click="button_del_Click"/>
+                <Button x:Name="button_next" Content="Następny" Margin="5" VerticalAlignment="Top" Width="75" Click="button_next_Click"/>
+            </WrapPanel>
+        </Grid>
+
     </Grid>
 </Window>
